@@ -7,6 +7,7 @@ class App extends Component {
     userEmail: "",
     userPassword: "",
     regulations: false,
+    message: "",
 
     err: {
       userName: false,
@@ -50,6 +51,7 @@ class App extends Component {
         userEmail: "",
         userPassword: "",
         regulations: false,
+        message: "Thank your for subscribing",
 
         err: {
           userName: false,
@@ -105,63 +107,72 @@ class App extends Component {
     };
   };
 
+  componentDidUpdate() {
+    if (this.state.message !== "") {
+      setTimeout(() => this.setState({ message: "" }), 2000);
+    }
+  }
+
   render() {
     return (
-      <form onSubmit={this.handleSubmit} noValidate>
-        <label htmlFor="userName">
-          Your name:{" "}
-          <input
-            type="text"
-            id="userName"
-            name="userName"
-            value={this.state.userName}
-            onChange={this.handleChange}
-          />
-          {this.state.err.userName && (
-            <span>{this.messages.userName_incorrect}</span>
-          )}
-        </label>
-        <label htmlFor="userEmail">
-          Your email:
-          <input
-            type="email"
-            id="userEmail"
-            name="userEmail"
-            value={this.state.userEmail}
-            onChange={this.handleChange}
-          />
-          {this.state.err.userEmail && (
-            <span>{this.messages.userEmail_incorrect}</span>
-          )}
-        </label>
-        <label htmlFor="userPassword">
-          Your password:
-          <input
-            type="password"
-            id="userPassword"
-            name="userPassword"
-            value={this.state.userPassword}
-            onChange={this.handleChange}
-          />
-          {this.state.err.userPassword && (
-            <span>{this.messages.userPassword_incorrect}</span>
-          )}
-        </label>
-        <label htmlFor="regulations">
-          <input
-            type="checkbox"
-            id="regulations"
-            name="regulations"
-            checked={this.state.regulations}
-            onChange={this.handleChange}
-          />
-          I have read the regulations
-          {this.state.err.regulations && (
-            <span>{this.messages.regulations_incorrect}</span>
-          )}
-        </label>
-        <button>Sign in</button>
-      </form>
+      <>
+        <form onSubmit={this.handleSubmit} noValidate>
+          <label htmlFor="userName">
+            Your name:{" "}
+            <input
+              type="text"
+              id="userName"
+              name="userName"
+              value={this.state.userName}
+              onChange={this.handleChange}
+            />
+            {this.state.err.userName && (
+              <span>{this.messages.userName_incorrect}</span>
+            )}
+          </label>
+          <label htmlFor="userEmail">
+            Your email:
+            <input
+              type="email"
+              id="userEmail"
+              name="userEmail"
+              value={this.state.userEmail}
+              onChange={this.handleChange}
+            />
+            {this.state.err.userEmail && (
+              <span>{this.messages.userEmail_incorrect}</span>
+            )}
+          </label>
+          <label htmlFor="userPassword">
+            Your password:
+            <input
+              type="password"
+              id="userPassword"
+              name="userPassword"
+              value={this.state.userPassword}
+              onChange={this.handleChange}
+            />
+            {this.state.err.userPassword && (
+              <span>{this.messages.userPassword_incorrect}</span>
+            )}
+          </label>
+          <label htmlFor="regulations">
+            <input
+              type="checkbox"
+              id="regulations"
+              name="regulations"
+              checked={this.state.regulations}
+              onChange={this.handleChange}
+            />
+            I have read the regulations
+            {this.state.err.regulations && (
+              <span>{this.messages.regulations_incorrect}</span>
+            )}
+          </label>
+          <button>Sign in</button>
+        </form>
+        <p>{this.state.message}</p>
+      </>
     );
   }
 }
